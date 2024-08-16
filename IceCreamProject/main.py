@@ -1,3 +1,4 @@
+
 import sqlite3
 import time
 
@@ -67,14 +68,6 @@ if __name__ == "__main__":
 
             if option in [1, 2, 3]:
                 cart.append(items[option - 1])
-                try:
-                    with connection:
-                        connection.execute("UPDATE sales SET saled = saled + 1 WHERE item = ?", (items[option - 1][0],))
-                except sqlite3.OperationalError as e:
-                    if 'database is locked' in str(e):
-                        print("Database is locked, retrying...")
-                        time.sleep(1)
-                        continue
 
             # Check for current cash
             elif option == 4:
